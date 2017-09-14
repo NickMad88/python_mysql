@@ -1,0 +1,72 @@
+<html>
+    <head>
+      <title>Friends</title>
+    </head>
+    <body>
+      <!-- we can use the line below to see all of our data in our template -->
+
+<h1>Login OR Register</h1>
+<!-- with all the data we can then construct a more structured output -->
+<table>
+    <tr>
+        <th>User Details:</th>
+
+    </tr>
+{% for users in all_users: %}
+    <tr>
+        <td>{{ users['first_name']  }}</td>
+    </tr>
+{% endfor %}
+<br><br><br>
+      <h2>Register</h2>
+      <form action='/register' method='POST'>
+        <label for="first_name">First Name:<input type="text" name="first_name" id="first_name"></label>
+        <br><label for="last_name">Last Name:<input type="text" name="last_name" id="last_name"></label>
+        <br><label for="email">Email:<input type="text" name="email" id="email"></label>
+        <br><label for="password">Password:<input type="password" name="password" id="password"></label>
+        <br><label for="repassword">Re-enter Password:<input type="password" name="repassword" id="repassword"></label>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <p>{{message}}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for password in messages %}
+          <p>{{password[0]}}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %} -->
+
+        <br><input type="submit" value="Register">
+      </form>
+
+      <h2>Login</h2>
+      <form action='/login' method='POST'>
+        <br><label for="email"> Enter Email:<input type="text" name="email" id="email"></label>
+        <br><label for="password"> Enter Password:<input type="password" name="password" id="password"></label>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <p>{{message}}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for password in messages %}
+          <p>{{password[0]}}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %} -->
+
+        <br><input type="submit" value="Login">
+      </form>
+      <br>
+    </body>
+    </html>
+    
