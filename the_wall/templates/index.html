@@ -1,0 +1,103 @@
+<html>
+    <head>
+      <title>The Wall</title>
+    </head>
+    <style>
+        #wrapper{
+          width: 900px;
+          height: 900px;
+          background-color: white;
+          display: inline-block;
+        }
+        #titlebar{
+          width: 500px;
+          height: 61px;
+          background-color: darkslategray;
+          /* padding-left: 60px; */
+          margin-left: 10px;
+          margin-top: 20px;
+          padding-left: 18px;
+          display: block;
+          border-radius: 21px;
+          position: relative;
+          left: 150px;
+          top: -9px;
+        }
+        #title{
+          text-align: center;
+          position: relative;
+          top: 10px;
+          color: white;
+        }
+        #registerbox{
+          display: inline-block;
+          width: 210px;
+          height: 200px;
+          border-radius: 15px;
+          background-color: lightgray;
+          padding-left: 10px;
+          position: relative;
+          left: 171px;
+        }
+        #loginbox{
+          display: inline-block;
+          width: 210px;
+          height: 200px;
+          border-radius: 15px;
+          background-color: lightgray;
+          padding-left: 10px;
+          position: relative;
+          left: 222px;
+          top: -21px;
+        }
+    </style>
+    <body>
+      <div id="wrapper">
+       
+       
+        <div id="titlebar">
+        <h1 id="title">The Coding Dojo Wall</h1>
+        </div>
+
+ 
+        <div id="registerbox">
+              <h2>Register</h2>
+              <form action='/register' method='POST'>
+                <label for="first_name">First Name:<input type="text" name="first_name" id="first_name"></label>
+                <br><label for="last_name">Last Name:<input type="text" name="last_name" id="last_name"></label>
+                <br><label for="email">Email:<input type="text" name="email" id="email"></label>
+                <br><label for="password">Password:<input type="password" name="password" id="password"></label>
+                <br><label for="repassword">Re-enter Password:<input type="password" name="repassword" id="repassword"></label>
+                
+              <br><input type="submit" value="Register">
+              </form>
+        </div>
+        <div id="loginbox">
+              <h2>Login</h2>
+              <form action='/login' method='POST'>
+                <br><label for="email"> Enter Email:<input type="text" name="email" id="email"></label>
+                <br><label for="password"> Enter Password:<input type="password" name="password" id="password"></label>
+
+              <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for password in messages %}
+                  <p>{{password[0]}}</p>
+                {% endfor %}
+              {% endif %}
+            {% endwith %} -->
+
+                <br><input type="submit" value="Login">
+              </form>
+        </div>
+              <br>
+              {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                {% for message in messages %}
+                  <p>{{message}}</p>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+      </div>
+    </body>
+</html>
+    

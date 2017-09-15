@@ -1,0 +1,85 @@
+<html>
+        <head>
+          <title>The REAL Wall</title>
+        </head>
+        
+        <style>
+            * {
+                margin: 0;
+            }
+            #wrapper{
+                width: 900px;
+                height: 990px;
+                background-color: white;
+                padding-left: 200px;
+            }
+            #messagepost{
+                width: 400px;
+                height: 250px;
+                background-color: white;
+                display: block;
+            }
+            #contents{
+                width: 400px;
+                background-color: white;
+                display: block;
+            }
+            #messagetext{
+                font-size: 10pt;
+                margin-left: 20px;
+                /* border-bottom: 1px solid black; */
+            }
+            #commenttext{
+                font-size: 10pt;
+                margin-left: 40px;
+                /* border-bottom: 1px solid black; */
+            }
+            .commenthead{
+                font-weight: bold;
+                font-size: 8pt;
+                margin-left: 30px;
+            }
+     </style>
+        
+        
+        <body>
+            <div id="wrapper">
+                <div id="messagepost">
+                    <h1>Welcome to The Wall!</h1>
+                    <br>
+                    <br>
+                    <h3>Hello {{ session['first_name'] }}! Post A Message:</h3>
+                    <form action='/post' method='POST'>
+                        <textarea name="messagecontent" id="messagecontent" cols="50" rows="6"></textarea>
+                        <br><input type="submit" value="Post Message">
+                    </form>
+                </div>
+                <div id="contents">
+                    {% for messages in all_messages %}
+                    <h5> {{ messages['first_name'] }}'s message at: {{ messages['created_at']}}</h5>
+                    <p id="messagetext"> {{ messages['content'] }} </p>
+                    <br>
+                  
+                    {% for comments in all_comments %}
+                    {% if comments['message_id'] == messages['id'] %}
+                    
+                    <p class="commenthead">{{ comments['first_name']}} comments {{ comments['created_at'] }}</p>
+                    <p id="commenttext"> {{ comments['content'] }} </p>
+                    {% endif %}
+                    {% endfor %}
+                    <form action='/commentpost' method='POST'>
+                        <textarea name="commentcontent" cols="50" rows="1"></textarea>
+                        <br><button type="submit" name="commentbutton" value= {{ messages['id'] }}>Post Comment</button>
+                    </form>
+                    <br>
+                  
+                    {% endfor %}
+
+                </div>
+
+            
+            </div>
+
+        </body>
+ </html>
+        
